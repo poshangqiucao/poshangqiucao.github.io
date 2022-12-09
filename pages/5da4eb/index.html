@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>基于Kafka的消息中间件的综述与使用示例中间件结课小论文 | 坡上秋草的博客</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="/img/favicon.ico">
+    <meta name="description" content="分享技术，感悟人生。">
+    <meta name="keywords" content="前端博客,个人技术博客,前端,前端开发,前端框架,web前端,前端面试题,技术文档,学习,面试,JavaScript,js,ES6,TypeScript,vue,python,css3,html5,Node,git,github,markdown">
+    <meta name="baidu-site-verification" content="7F55weZDDc">
+    <meta name="theme-color" content="#11a8cd">
+    
+    <link rel="preload" href="/assets/css/0.styles.58f03f6f.css" as="style"><link rel="preload" href="/assets/js/app.44072b21.js" as="script"><link rel="preload" href="/assets/js/2.6882938f.js" as="script"><link rel="preload" href="/assets/js/54.aa9d5245.js" as="script"><link rel="prefetch" href="/assets/js/10.6e0520c1.js"><link rel="prefetch" href="/assets/js/11.04ce75c8.js"><link rel="prefetch" href="/assets/js/12.3aa054ee.js"><link rel="prefetch" href="/assets/js/13.8ab4e888.js"><link rel="prefetch" href="/assets/js/14.fbb23a64.js"><link rel="prefetch" href="/assets/js/15.7116eba9.js"><link rel="prefetch" href="/assets/js/16.c830db32.js"><link rel="prefetch" href="/assets/js/17.71ad1d58.js"><link rel="prefetch" href="/assets/js/18.a1ca30d0.js"><link rel="prefetch" href="/assets/js/19.f9b20a5c.js"><link rel="prefetch" href="/assets/js/20.e573a293.js"><link rel="prefetch" href="/assets/js/21.4a410d59.js"><link rel="prefetch" href="/assets/js/22.eaebf22b.js"><link rel="prefetch" href="/assets/js/23.1ab17c7d.js"><link rel="prefetch" href="/assets/js/24.caa5334c.js"><link rel="prefetch" href="/assets/js/25.019783d6.js"><link rel="prefetch" href="/assets/js/26.610af9c7.js"><link rel="prefetch" href="/assets/js/27.4c41c469.js"><link rel="prefetch" href="/assets/js/28.1a904e4a.js"><link rel="prefetch" href="/assets/js/29.076c02b0.js"><link rel="prefetch" href="/assets/js/3.ce2d2f4a.js"><link rel="prefetch" href="/assets/js/30.b54eb364.js"><link rel="prefetch" href="/assets/js/31.47f0c946.js"><link rel="prefetch" href="/assets/js/32.4ccc4f07.js"><link rel="prefetch" href="/assets/js/33.e22cea61.js"><link rel="prefetch" href="/assets/js/34.224850fb.js"><link rel="prefetch" href="/assets/js/35.b4a75044.js"><link rel="prefetch" href="/assets/js/36.14bed84d.js"><link rel="prefetch" href="/assets/js/37.98c00d0d.js"><link rel="prefetch" href="/assets/js/38.1009fd07.js"><link rel="prefetch" href="/assets/js/39.f76ded8b.js"><link rel="prefetch" href="/assets/js/4.2b08200f.js"><link rel="prefetch" href="/assets/js/40.cb2a3f21.js"><link rel="prefetch" href="/assets/js/41.d12c7565.js"><link rel="prefetch" href="/assets/js/42.c39c6d71.js"><link rel="prefetch" href="/assets/js/43.8375561f.js"><link rel="prefetch" href="/assets/js/44.be6e4594.js"><link rel="prefetch" href="/assets/js/45.478c9628.js"><link rel="prefetch" href="/assets/js/46.c9dd2776.js"><link rel="prefetch" href="/assets/js/47.93ffeeb3.js"><link rel="prefetch" href="/assets/js/48.59600a46.js"><link rel="prefetch" href="/assets/js/49.3bfdd2e9.js"><link rel="prefetch" href="/assets/js/5.055136ca.js"><link rel="prefetch" href="/assets/js/50.d729f663.js"><link rel="prefetch" href="/assets/js/51.4756be5c.js"><link rel="prefetch" href="/assets/js/52.aab6d074.js"><link rel="prefetch" href="/assets/js/53.32c53b64.js"><link rel="prefetch" href="/assets/js/55.8b85bc56.js"><link rel="prefetch" href="/assets/js/56.fdd52a38.js"><link rel="prefetch" href="/assets/js/57.7dc3aae4.js"><link rel="prefetch" href="/assets/js/58.861974dc.js"><link rel="prefetch" href="/assets/js/59.0daaf63e.js"><link rel="prefetch" href="/assets/js/6.7af48a6f.js"><link rel="prefetch" href="/assets/js/60.b93303ff.js"><link rel="prefetch" href="/assets/js/61.7a2347c0.js"><link rel="prefetch" href="/assets/js/62.93b0e658.js"><link rel="prefetch" href="/assets/js/63.cc526e15.js"><link rel="prefetch" href="/assets/js/64.7da7f928.js"><link rel="prefetch" href="/assets/js/65.41ce0862.js"><link rel="prefetch" href="/assets/js/66.d7bc5371.js"><link rel="prefetch" href="/assets/js/67.029baa54.js"><link rel="prefetch" href="/assets/js/68.d453705f.js"><link rel="prefetch" href="/assets/js/69.af35fb51.js"><link rel="prefetch" href="/assets/js/7.63409061.js"><link rel="prefetch" href="/assets/js/70.e7087139.js"><link rel="prefetch" href="/assets/js/71.465cf0cb.js"><link rel="prefetch" href="/assets/js/72.4ed56fde.js"><link rel="prefetch" href="/assets/js/73.263fb6f5.js"><link rel="prefetch" href="/assets/js/74.153cf18e.js"><link rel="prefetch" href="/assets/js/75.37d8cc14.js"><link rel="prefetch" href="/assets/js/76.0cddc5fc.js"><link rel="prefetch" href="/assets/js/77.acf7ee27.js"><link rel="prefetch" href="/assets/js/78.6e851333.js"><link rel="prefetch" href="/assets/js/79.49e75aaf.js"><link rel="prefetch" href="/assets/js/8.7018d15d.js"><link rel="prefetch" href="/assets/js/80.d89451a5.js"><link rel="prefetch" href="/assets/js/81.c8bc9a50.js"><link rel="prefetch" href="/assets/js/9.6b938de5.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.58f03f6f.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/logo.jpeg" alt="坡上秋草的博客" class="logo"> <span class="site-name can-hide">坡上秋草的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/random/" class="nav-link">知识</a></div><div class="nav-item"><a href="/sea/" class="nav-link">大海</a></div><div class="nav-item"><a href="/2021/" class="nav-link">2021年的回忆</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div> <a href="https://github.com/poshangqiucao" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar-hover-trigger"></div> <aside class="sidebar" style="display:none;"><div class="blogger"><img src="img/logo2.jpeg"> <div class="blogger-info"><h3>po shang</h3> <span>一个求索的人</span></div></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><a href="/random/" class="nav-link">知识</a></div><div class="nav-item"><a href="/sea/" class="nav-link">大海</a></div><div class="nav-item"><a href="/2021/" class="nav-link">2021年的回忆</a></div><div class="nav-item"><a href="/about/" class="nav-link">关于</a></div> <a href="https://github.com/poshangqiucao" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/pages/4bcc3e/" class="sidebar-link">docker搭建简易kafka实验环境</a></li><li><a href="/pages/2e2325/" class="sidebar-link">ELK实践手记</a></li><li><a href="/pages/d84310/" class="sidebar-link">flink实验环境搭建</a></li><li><a href="/pages/fb9027/" class="sidebar-link">github图片无法显示可以尝试修改hosts文件</a></li><li><a href="/pages/c979e2/" class="sidebar-link">hadoop实践小记</a></li><li><a href="/pages/50e75e/" class="sidebar-link">HDFS读写流程</a></li><li><a href="/pages/5f78e9/" class="sidebar-link">map阶段的一点记录</a></li><li><a href="/pages/8afeea/" class="sidebar-link">nginx的使用研究</a></li><li><a href="/pages/0d8fc5/" class="sidebar-link">Vuex学习简记</a></li><li><a href="/pages/f9d76a/" class="sidebar-link">Windows右键即可创建Markdown文件</a></li><li><a href="/pages/d36e2b/" class="sidebar-link">关于Yarn</a></li><li><a href="/pages/5da4eb/" aria-current="page" class="active sidebar-link">基于Kafka的消息中间件的综述与使用示例中间件结课小论文</a></li><li><a href="/pages/316f6a/" class="sidebar-link">进程管理工具Supervisord的简单使用</a></li><li><a href="/pages/ea271f/" class="sidebar-link">使用docker部署ElasticSearch和Kibana</a></li><li><a href="/pages/1a950d/" class="sidebar-link">使用docker部署solo博客系统</a></li><li><a href="/pages/d8dfbe/" class="sidebar-link">系统使用守则</a></li><li><a href="/pages/dce7ef/" class="sidebar-link">一个Spark作业提交示例</a></li><li><a href="/pages/0a7a1c/" class="sidebar-link">一个ES索引创建示例</a></li><li><a href="/pages/1b84cc/" class="sidebar-link">docker安装Jenkins</a></li><li><a href="/pages/974735/" class="sidebar-link">docke换源问题</a></li><li><a href="/pages/bacc05/" class="sidebar-link">tailwind在vue2中的安装</a></li><li><a href="/pages/992221/" class="sidebar-link">React中useState和useEffect的学习心得</a></li><li><a href="/pages/0ba016/" class="sidebar-link">将vuex中的状态持久化到浏览器存储</a></li><li><a href="/pages/c5219e/" class="sidebar-link">hadoop2.7.7搭建中yarnsite.xml文件的配置</a></li><li><a href="/pages/865fc4/" class="sidebar-link">在next.js中添加tailwind报错解决方案</a></li><li><a href="/pages/68f4d6/" class="sidebar-link">基于docker的mysql5.7主从复制测试</a></li><li><a href="/pages/984464/" class="sidebar-link">pytorch的gpu版本快速安装简要说明</a></li><li><a href="/pages/814558/" class="sidebar-link">docker快速部署mysqlredisnginxnacos</a></li><li><a href="/pages/ff64b6/" class="sidebar-link">若依系统增加业务模块</a></li><li><a href="/pages/100546/" class="sidebar-link">ESPHome简介</a></li><li><a href="/pages/444e55/" class="sidebar-link">SpringCloudAlibaba使用记录seata分布式事务</a></li><li><a href="/pages/6f4692/" class="sidebar-link">SpringCloudAlibaba使用记录服务调用</a></li><li><a href="/pages/8de639/" class="sidebar-link">SpringCloudAlibaba使用记录服务网关</a></li><li><a href="/pages/7593e2/" class="sidebar-link">SpringCloudAlibaba使用记录服务注册和配置动态刷新</a></li></ul> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-06225672><div class="articleInfo" data-v-06225672><ul class="breadcrumbs" data-v-06225672><li data-v-06225672><a href="/" title="首页" class="iconfont icon-home router-link-active" data-v-06225672></a></li> <li data-v-06225672><a href="/2021/#2021年的回忆" data-v-06225672>2021年的回忆</a></li></ul> <div class="info" data-v-06225672><div title="作者" class="author iconfont icon-touxiang" data-v-06225672><a href="https://github.com/poshangqiucao" target="_blank" title="作者" class="beLink" data-v-06225672>poshang</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-06225672><a href="javascript:;" data-v-06225672>2022-11-25</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><!----> <h1><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAABKFJREFUSA3tVl1oFVcQnrMbrak3QUgkya1akpJYcrUtIqW1JvFBE9LiQ5v6JmJpolbMg32rVrhgoYK0QiMY6i9Y6EMaW5D+xFJaTYItIuK2Kr3+BJNwkxBj05sQY3b3nM6cs2dv9t7NT/vQJw/sndk5M/PNzJkzewGerP+pAmy+ON8lLzUJgA8ZYxYIYZmGYRnctDaWvJJAmTtfP1pvXsBCCPP8QFcCaRkZYACgDZFO4stNIcBCajEOlmmC9XpJ9bAGCaPaPmzPl32dvLSVu3BWCTQs0XQQ6g0DYgwLIoAZbBCdW/i+781o1VVlm/410mw4h06Y7bIPHNyWDyL4FHkX03Q8SrzNhZTZriieckWt7cL6MM85YcLpsi/7O9/iXFT6MswI0DmmpkSaJ0qLxFIm3+i1THHB3zmBH3PYx9CcykcLOeQVVa7QtdxTgQgEleX2AjHYfwA+2ddV77ruGoJUbhGDI09YSNXyMpUt5ylOzxgbUmtOp7NmbNt8v3arjTBfYELmLUV+M+nSawNNAUqpT3ClJWg5I3BLT+cGW/DXNGCa6tx1aakCGEigArTn4TDIPdrXXYKCZNrHLMCOEPvHBlLQ99s9eHB7EB6NTki73CVPQ2F5MSx/uRQixfmq7rK0wYD8w8E905bnPDfwoWs/rfv93NWN/ZfvwsLIU7A09gxECyISeGJkHAau98L97tuw7NXnoPyNF8FcYGLGKsOs0mN3OEyec9esGW/ZEl945dTP34wlR2FZVQWU1q0Cw8Tr7p+hgLLNL0FPxx/Q35mA8aEUrH6nCgwEl0tn7wUiZYJnNRh6DK4UH/k0lfyrsBKdPVv/AriGIQcEDQZ65LBAGe2Rzui9Ybjz7XUppz1/uKBbyVPGkN3ZAeC6hr0x7Nr38N5+EqkoOm17xpoqR9ohQF55ERSvr4Dkr3chNfC3DMzGJlNBElW8w9nsGQvhNGIzDkXzCg8cLK951xHsFBlTJspJNi3ZFIMF2AeDV3q8DNOB+YHi6QTrChDIWDBRi5U5f+ZMfJLu3ccrqxtdxk4SKH336LFxSmkqefwU5T8fhdSdQf9IVKD6aNiwI/hnmcAZ91isYMJIaCUCx9W098+LgruikeTqzqqxKPUwqJyCPJiyemVVZBOijDGjD38Os0jOiSPL1z3SPjXNANbiNPXAdzTfukjjuknNBbyz3nwgTd3AVFqUJ5hpHlq9MveLnWwttUfoygBmvVjuikxND3znrhsELnZk7k+OjIGxeNEkomyLVta0xxn+HZhjBc4YZ/AFjHjz9u3xRZl2BN4aq9nFwWh16IrQ1aHHEd3j1+4/dB9OtH4e29A2H1DyHQRmOSfQZ1Fy7MHBTGB6J/Djq6p3OxyO2cB+4Car7v/o3GXgfAkj23+x9ID1Teoamo/SXcbvSf2PX7Vc8DdCmE1vN9di+32P9/5YR3vLnhCVGUWBjEkr3yh4H8v9CzmsbdhzOKzsJKM90iFdaTMjRPhGVsakRvOaRidljo6H6G7j+ctrJpsP+4COhDIl0La2+FS4+5mlocBaXY5QnGZysIBYoeSsl5qQzrSj/cgNrfuEzlWBfwA+EjrZyWUvpAAAAABJRU5ErkJggg==">基于Kafka的消息中间件的综述与使用示例中间件结课小论文<!----></h1>  <div class="theme-vdoing-content content__default"><p><img src="https://b3logfile.com/bing/20191130.jpg?imageView2/1/w/960/h/540/interlace/1/q/100" alt=""></p> <p>1.摘要</p> <p>本文简要概述了Kafka的由来，并详细说明了Kafka的架构和设计原则。在充分了解了Kafka相关原理的基础上，尝试使用虚拟机搭建了一个单机多实例的Kafka及其所需的Zookeeper集群。最后在已有集群基础上整合Spring Boot,构建了一个简易的Kafka使用用例。
+2.研究现状
+近年来,随着信息技术与互联网应用的不断发展,全球数据总量也在呈现爆炸式的增长,大数据时代即将来临[1]。任何大型互联网公司都会产生大量的“日志”数据，如社交网站中登录、浏览、点击、喜欢、分享、评论以及网络服务本身的调用栈、调用延迟、错误报告以及一些机器运行指标数据。这些数据被越来越多的用到线上业务，实现诸如基于数据驱动的推荐、广告精准投放的功能。传统的企业级消息系统如activemq，IBM Websphere MQ，Oracle Enterprise Messaging Service，TIBCO Enterprise Message Service已经存在很长时间了，主要作用是消息总线和异步解耦，但它们并不能无缝适配以上的需求。Apache Kafka起源于LinkedIn，后来于2011年成为Apache开源项目，然后于2012年成为Apache项目的第一个类别。它是使用Scala和Java编写的。Apache Kafka,作为一种分布式的消息系统,具有可水平扩展和高吞吐率而被广泛的使用[2]。
+3.Kafka的概念体系和架构
+3.1主要概念和术语
+数据源,在用户行为分析中主要是指移动端日志和web日志[3]。一个日志记录也称为记录或消息。当向Kafka读取或写入数据时，将以事件的形式进行操作。从概念上讲，事件具有键、值、时间戳和可选的元数据标题。下面是一个示例事件：事件的键：“张三”，事件的值：“向李四支付了200元”，事件发生的时间戳记录：“2020年11月29日，下午2:06”。
+生产者是那些向Kafka发布事件的客户端应用程序，而消费者是那些订阅即读取和处理这些事件的客户端应用程序。在Kafka中，生产者和消费者之间完全脱钩且彼此不可知，由此Kafka实现了高可伸缩性。在传统应用开发中，服务之间通过HTTP和RPC调用实现通信，造成服务之间存在高耦合、请求易阻塞以及请求无缓冲等缺陷。特别是业务逻辑越发复杂，所需服务数量越多。随着服务规模的不断扩张以及服务请求量的急剧增加,这些缺陷也被不断地放大从而影响着整个系统的性能和稳定性[4]。
+Kafka中的主题始终是多生产者和多用户的：一个主题可以有零个，一个或多个向其写入事件的生产者，以及零个，一个或多个订阅这些事件的使用者。可以根据需要随时读取主题中的事件-与传统的消息传递系统不同，使用后事件不会被删除。相反，您可以通过按主题配置设置来定义Kafka将事件保留多长时间，之后旧的事件将被丢弃。Kafka的性能相对于数据大小实际上是恒定的，因此长时间存储数据是非常好的。
+主题分区，这意味着主题分布在位于不同Kafka Broker上的多个存储单元中。数据的这种分布式放置对于可伸缩性非常重要，因为它允许客户端应用程序同时从多个Broker读取数据或向多个Broker写入数据。将新事件发布到主题时，实际上会将其附加到主题的分区之一。具有相同事件密钥，例如，客户ID或车辆ID的事件被写入相同的分区，并且Kafka保证，给定主题分区的任何使用者都将始终以与写入时完全相同的顺序读取该分区的事件。
+为了使数据具有容错性和高可用性，在地理区域或数据中心之间，可以复制每个主题，因此，总是有多个代理可以复制数据，以防万一出错。常见的生产设置中复制因子为3，也就是始终会有三个数据副本。复制将在主题分区级别执行。
+3.2架构体系
+Kafka的架构图（使用ProcessOn绘制导出png格式）如下：</p> <p><img src="https://b3logfile.com/file/2021/01/image-b6d0162e.png" alt="image.png"></p> <p>Kafka架构图
+Broker: Kafka作为一个或多个服务器的集群运行，可以跨越多个数据中心或云区域。其中一些服务器构成了存储层，称为代理。其他服务器运行 Kafka Connect来连续导入和导出数据作为事件流，以将Kafka与现有系统集成在一起，例如关系数据库以及其他Kafka群集。为了实现关键任务用例，Kafka群集具有高度的可扩展性和容错能力：如果其任何服务器发生故障，其他服务器将接管其工作，以确保连续运行而不会丢失任何数据。
+Consumer/Producer: 用户可以编写分布式应用程序和微服务，即使在网络问题或机器故障的情况下，也可以并行，大规模且以容错的方式读取，写入和处理事件流。Kafka附带了一些这样的客户端，由Kafka社区提供的数十个客户端进行了扩展 ：客户端可用于Java和Scala，包括更高级别的 Kafka Streams库，Go，Python，C / C ++和许多其他编程语言以及REST API。
+Topic:相当于传统消息系统MQ中的一个队列queue，producer端发送的message必须指定是发送到哪个topic上.在一个大型的应用系统中，可以根据功能的不同，区分不同的topic(订单的topic,登录的topic,金额的topic等等)
+Partition: 为了实现扩展性，一个非常大的topic可以分布到多个broker（即服务器）上，一个topic可以分为多个partition，每个partition是一个有序的队列。partition中的每条消息都会被分配一个有序的id（offset）。kafka只保证按一个partition中的顺序将消息发给consumer，不保证一个topic的整体（多个partition间）的顺序。
+4.Kafka的设计原则
+4.1存储设计
+Kafka依赖于文件系统来存储和缓存消息。一个主题的每个分区就是逻辑上的一段消息集合。具体到物理上，为了防止分区文件过大，Kafka会将其进一步分成数据段。每次数据往最新的数据段中写，写到设定容量后，就会新建一个段文件继续写。此外，为了提高写入性能，Kafka会将事件记录在内存中进行缓存，只有事件数量达到设定值或者缓存数据的大小达到设定值时，才会将数据写入外存中。为了保证可靠性，只有数据已写入外存后，才会将其通知给消费者。
+和传统的消息系统不同，Kafka在设计时采用了文件追加的方式来写入消息，即只能在段文件的尾部追加新的消息，并且也不允许修改己写入的消息，这种方式属于典型的顺序写盘的操作，顺序写磁盘的速度要比随机写内存的速度更块。每个消费者总是顺序的去消费每个分区的数据。创建topic时，Kafka为该topic的每个分区在文件系统中创建一个对应的子目录，名字就是<topic>-&lt;分区号&gt;。所以倘若有一个topic名为test，有两个分区，那么在文件系统中kafka会创建两个子目录：test-0和test-1。每个日志子目录的文件都是由若干组分段构成。每个分段中的日志文件以log后缀都有两个对应的索引文件：偏移量索引文件（&quot;.index&quot;后缀）和时间戳索引文件（以&quot;.timeindex&quot;为后缀）。这些索引文件帮助Broker更快的定位消息所在的物理文件位置。
+4.2传输设计
+网络传输是比较消耗时间和系统资源的，因此Kafka在网络传输的设计采取了较多的优化。生产者可以批量传输数据到Broker,消费者虽然看起来是逐条消费的，但在API实现的底层也是批量拉取一定大小的消息供消费者消费。Kafka在操作系统层面使用页缓存加快磁盘读写，在传统上，一条数据从本地文件送到socket上通常包含以下几个过程：
+(1)从外存中读入数据到操作系统的页缓存。
+(2)从页缓存拷贝数据到应用缓冲区中。
+(3)从应用缓冲区拷贝到内核缓冲区。
+(4)从内核缓冲区拷贝到socket。
+这些过程涉及四次数据拷贝和两次系统调用，非常浪费资源。在Linux操作系统中，存在一个sendfile 零拷贝技术的API，能够直接将数据从文件传送到socket中。利用此API，可以省去步骤(2)(3)中引入的两次数据拷贝和一次系统调用，由此使得Kafka可以将数据从Broker的段文件中高效的传输给消费者，极大提高了系统性能。
+4.3无状态的Broker
+与其他消息队列不同，Kafka的Broker仅提供基于offset的读取方式，不会维护各个消费者当前已消费消息的offset值，而是由消费者各自维护当前读取的进度。消费者读取数据时告诉Broker请求消息的起始offset值，Broker将之后的消息流式发送过去。从而使Broker的设计可以相对简化，不用维护过多状态。但是这样做也存在一些问题，Broker不知道消费者消费到了哪里，也就不知道哪些消息需要被清理。对此，Kafka使用了一个简单的策略，对消息设定有效期，每个主题可以设置不同的有效期。这个简单的策略适用于绝大多数情况。大量存储和拉取的设计带来的另外一个重要的好处是消费者可以主动选择进行回退消费。这个需求看起来违背了通常消息队列的定义，然而在很多情况下却非常有必要。举例来说，当消费者进程由于错误而挂掉后，可以在恢复后有选择的对挂掉前后的数据重新消费。这对将ETL数据导入Hadoop等数据仓库之类的场景非常重要。但是对于Kafka来说，消费者只需要记住消费到的offset即可，下次重启后再从该offset后开始拉取。但是对于传统没有大量缓存的消息队列来说，可能这部分数据就永远的丢了。
+4.4分布式协调一致
+多个生产者和消费者在分布式环境中的行为，对于生产者，其发送数据时，可以将其随机发送到一个分区所在Broker；也可以根据key以及作用于key上的路由函数，将其发送到某特定分区机器Broker上。对于消费者,行为稍复杂。
+在Kafka中，多个消费者或消费者实例可以组成一个消费者组。它们共享一个公共的ID，即group ID，组内的所有消费者协调在一起来消费订阅主题的所有分区。对于消费者组的理解需要明白三点：一.消费者组下可以有一个或多个消费者实例，消费者实例可以是一个进程，也可以是一个线程。二是组ID是一个字符串，唯一标识一个消费者组。三是消费组下订阅的主题的每个分区只能分配给组内一个消费者。
+Kafka引入了一个高可用的一致性服务Zookeeper。Zookeeper的API很像文件系统，是以前缀树的形式组织的KV也就是键值对，K键是路径，以’/’来区分层次，V值可以是任何可序列化的值存储。该API支持创建一个路径、给一个路径设置值、读取路径的值、删除一个路径、列出某个路径下所有子节点的值。此外，Zookeeper还具有以下特性：
+(1)客户端可以向某个路径注册一个回调函数，以监听该路径的值或其孩子节点的变动。
+(2)路径可以被创建为易失的，即当所有该路径的客户端消失后，该路径及值会被自动的移除。
+(3) Zookeeper使用一致性协议将其数据进行多机备份，使其服务具有高可靠性和高可用性。
+Kafka使用Zookeeper完成以下几个任务：
+(1)监控Brokers和消费者的增删。
+(2)当出现Brokers或者消费者的增删时，启动消费再平衡任务。
+(3)维护消费者的间关系状态，跟踪每个分区的消费偏移量。
+具体来说，代理和消费者会将自身元信息注册到Zookeeper的注册表中，其中包括：代理的主机名、端口以及在其上的主题和分区。每个消费者组都在Zookeeper中有一个相关联的所有权注册表和偏移量注册表。我们将消费者消费某个分区的行为称为占有，所有权注册表即记录了消费者与其占有的分区间的对应关系。其中，路径名标识一个分区，记录值是该分区的拥有者。偏移量记录表记录了该消费者组所有订阅的 topic 对应的每个分区的消费进度。
+当一个新的消费者组创建时，注册表中没有任何的偏移量记录。这时，使用Broker提供的 API，该消费者组可以针对每个分区选择从最小的偏移量或者最大的偏移量进行消费。
+4.5数据交付保证
+Kafka提供3种消息传输一致性语义：最多1次，最少1次，恰好1次。最少1次：可能会重传数据，有可能出现数据被重复处理的情况;最多1次：可能会出现数据丢失情况;
+恰好1次：并不是指真正只传输1次，只不过有一个机制。确保不会出现“数据被重复处理”和“数据丢失”的情况。
+Kafka保证来自于同一个分区的消息是保序的，即offset大小顺序，但是不同分区之间的顺序是不保证的。
+5.Kafka特性与安全
+面向存储的消息队列：意味在近实时的情况下能够将传统消息队列的存储增加几个数量级。实现原理是充分利用了磁盘的顺序写和操作系统自身的缓存；此外为了提高访盘、传输效率，使用了文件分段、段首索引、零拷贝和批量拉取等技术。
+灵活的生产消费方式：基于主题粒度的发布订阅式架构，并且既支持组内多消费者互斥消费，也支持不同消费者组间的重复消费。这里面涉及到消息队列的两个设计选择：pull式消费以及客户端侧存储消费进度。为了简化实现，消费时，每个分区最多为一个消费者所消费。
+Zookeeper存储元信息：利用分布式一致性组件Zookeeper以注册表的形式存储系统元信息，包括Broker和消费者的存活信息、消费者和分区间的对应关系、每个分区的消费进度等等。Zookeeper作为一个前缀树形式组织KV、支持发布订阅的高可用组件，可以满足 Kafka进行消费协调和进度保存的协作需求。
+简洁强大的消费接口：Kafka的客户端一般提供两层接口抽象。包括无需关注分区和偏移量信息的高层（high-level）简单读写接口，以及可以灵活控制分区组织和消费进度的低层（low-level）接口。
+随着越来越多的安全漏洞、数据泄露等问题的爆发,安全正成为系统选型不得不考虑的问题,Kafka由于其安全机制的匮乏,也导致其在数据敏感行业的部署存在严重的安全隐患[5]。在拥有强大性能的同时，Kafka在安全方面的问题需要在实际部署应用时特别注意，以免造成生产事故。
+6.应用场景
+Kafka有着丰富的使用场景并且已经得到了广泛而深入的应用。例如：在证券交易所，银行和保险中，用于实时处理付款和金融交易。在物流和汽车行业，实时跟踪和监视汽车，卡车，车队和货运。在物联网应用中，连续捕获和分析来自IoT设备或其他设备（例如工厂和风电场）中的传感器数据。在零售，酒店和旅游行业以及移动应用程序中，收集并立即响应客户的交互和订单。监测患者的医院护理情况并预测病情变化，以确保在紧急情况下及时得到治疗。还可以连接，存储和提供公司不同部门产生的数据，用作数据平台，事件驱动的体系结构和微服务的基础。
+7.使用示例
+7.1搭建Kafka和Zookeeper单机多实例环境
+本测试环境使用Linux操作系统环境，发行版本为CentOS-7-x86_64-Minimal-1908，虚拟化软件为VMware Workstation Pro。为虚拟机分配1GB内存，硬盘容量20GB，使用NAT模式联网，实体机与虚拟机器在同一网段下，可以相互访问，为后续本机访问虚拟机中的Kafka集群提供网络基础条件。
+(1)	搭建虚拟机环境，配置虚拟机静态IP。</topic></p> <p>配置Linux主机网卡设置静态IP：vim /etc/sysconfig/network-script/ifcfg-ens33,保存配置后重启网络：systemctl restart network，以下是配置详单。
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPADDR=192.168.10.12
+NETMASK=255.255.255.0
+GATEWAY=192.168.10.2
+DNS1=114.114.114.114
+DNS2=8.8.8.8
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33
+UUID=30da6508-90d0-4643-8f65-efa88eec2481
+DEVICE=ens33
+ONBOOT=yes</p> <p>(2)	获取Zookeeper安装包 wget https://xxx/apache-zookeeper-3.6.2-bin.tar.gz
+(3)解压安装包 tar –zxvf apache-zookeeper-3.6.2-bin.tar.gz
+(4)修改配置文件 zoox.cfg,参考如下：
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/opt/data/zookeeper/zkserver1
+clientPort=2181
+server.1=127.0.0.1:2888:3888
+server.2=127.0.0.1:2889:3889
+server.3=127.0.0.1:2890:3890
+其中dataDir设置三个配置文件写三个不同的目录，事先创建好,在每个目录下创建myid文件写入数字序号，例如第一个实例写入1。clienPort每个实例各不相同，server.x各个端口不能相同，因为我们是单机运行多个实例。
+(5)运行Zookeeper 在其目录里执行命令：
+bin/zkServer.sh start conf/zoox.cfg
+(6)执行 netstat –ntpl查看是否程序监听相应端口
+(7)获取Kafka安装包
+wget https://xxx/kafka_2.13-2.6.0.tgz
+(8)解压
+tar –zxvf kafka_2.13-2.6.0.tgz
+(9)修改配置文件
+vim config/serverx.properties  需修改的配置：
+broker.id=1
+listeners=PLAINTEXT://192.168.10.12:9091
+log.dir=/opt/data/kafka/server1
+zookeeper.connect=127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+(10)启动三个Kafka实例，在其目录中执行
+bin/kafka-server-start.sh –daemon config/serverx.properties</p> <p>(11)运行jps,检查zookeeper和kafka服务是否正常运行。
+7.2 Spring Boot整合Kafka使用用例
+使用IDEA新建Spring Boot项目，勾选Spring Boot整合Kafka的依赖库，maven文件截图如下：
+新建类KafkaProducer作为一个Controller。</p> <p>创建方法saycallback接受用户get请求并设置路径参数，将值作为消息发送到Kafka集群的topic1主题下，注册回调函数用于处理发送结果。
+新建类KafkaConsumer用于消费Kafka集群中的消息。使用@Component注解标识此类为组件，此类中有一个KafkaTemplate类型的属性，该属性值由spring自动注入，对象的构造由kafka支持库自动读取配置文件完成构建。spring将注入此消费者类到IOC容器。
+在类中创建方法getMessage3接受消息并打印，由注解@KafkaListener可知消费者的id为consumer2，消费者组id为consumer-group2，消费的主题为topic1。通过注解@KafkaListener可以指定消费的主题，分区以及初始偏移值，也可以指定消费多个
+主题。</p> <p>以下为示例代码和配置文件截图：</p> <p><img src="https://b3logfile.com/file/2021/01/image-91d3e964.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-6c89b927.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-0ab00e48.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-de8b4682.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-5449c714.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-001a59cf.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-5a7b065e.png" alt="image.png"></p> <p>环境搭建截图：</p> <p><img src="https://b3logfile.com/file/2021/01/image-9d52169f.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-cd78e2db.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-b896f80f.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-0c5adef0.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-a8210bbc.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-6f163233.png" alt="image.png"></p> <p>以下是运行结果截图：</p> <p><img src="https://b3logfile.com/file/2021/01/image-2e6e9aea.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-46cfcc07.png" alt="image.png"></p> <p><img src="https://b3logfile.com/file/2021/01/image-64d0611d.png" alt="image.png"></p> <p>8.参考文献
+[1]牛牧. 基于Kafka的大规模流数据分布式缓存与分析平台[D].吉林大学,2016.
+[2]王岩,王纯.一种基于Kafka的可靠的Consumer的设计方案[J].软件,2016,37(01):61-66.
+[3]费秀宏. 基于Kafka的日志处理平台的研究[D].吉林大学,2017.
+[4]卢帅. 基于Kafka的消息发布订阅服务的设计与实现[D].南京大学,2018.
+[5]孙元浩.如何构建安全的Kafka集群[J].电信网技术,2015(08):10-14.</p></div></div>  <div class="page-edit"><div class="edit-link"><a href="https://github.com/poshangqiucao/edit/master/docs/03.2021年的回忆/12.基于Kafka的消息中间件的综述与使用示例中间件结课小论文.md" target="_blank" rel="noopener noreferrer">编辑</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2022/11/25, 11:13:43</span></div></div> <div class="page-nav-wapper"><div class="page-nav-centre-wrap"><a href="/pages/d36e2b/" class="page-nav-centre page-nav-centre-prev"><div class="tooltip">关于Yarn</div></a> <a href="/pages/316f6a/" class="page-nav-centre page-nav-centre-next"><div class="tooltip">进程管理工具Supervisord的简单使用</div></a></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/pages/d36e2b/" class="prev">关于Yarn</a></span> <span class="next"><a href="/pages/316f6a/">进程管理工具Supervisord的简单使用</a>→
+      </span></p></div></div></div> <div class="article-list"><div class="article-title"><a href="/archives/" class="iconfont icon-bi">最近更新</a></div> <div class="article-wrapper"><dl><dd>01</dd> <dt><a href="/pages/ebf64f/"><div>
+            css布局的一点记录
+            <!----></div></a> <span class="date">12-09</span></dt></dl><dl><dd>02</dd> <dt><a href="/pages/313466/"><div>
+            ES的一点记录
+            <!----></div></a> <span class="date">12-09</span></dt></dl><dl><dd>03</dd> <dt><a href="/pages/099306/"><div>
+            python一个简单的词云图
+            <!----></div></a> <span class="date">12-09</span></dt></dl> <dl><dd></dd> <dt><a href="/archives/" class="more">更多文章&gt;</a></dt></dl></div></div></main></div> <div class="footer"><div class="icons"><a href="mailto:poshangqiucao@gmail.com" title="发邮件" target="_blank" class="iconfont icon-youjian"></a><a href="https://github.com/poshangqiucao" title="GitHub" target="_blank" class="iconfont icon-github"></a><a href="https://music.163.com/#/playlist?id=755597173" title="听音乐" target="_blank" class="iconfont icon-erji"></a></div> 
+  Theme by
+  <a href="https://github.com/xugaoyi/vuepress-theme-vdoing" target="_blank" title="本站主题">Vdoing</a> 
+    | Copyright © 2019-2022
+    <span>Po Shang | <a href="https://github.com/xugaoyi/vuepress-theme-vdoing/blob/master/LICENSE" target="_blank">MIT License</a></span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <!----> <!----> <!----></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.44072b21.js" defer></script><script src="/assets/js/2.6882938f.js" defer></script><script src="/assets/js/54.aa9d5245.js" defer></script>
+  </body>
+</html>
